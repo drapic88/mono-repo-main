@@ -2,7 +2,8 @@ name: Pull Subtree and Push
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   pull-subtree-and-push:
@@ -13,12 +14,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Clone remote repository
-        run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
+
+      # Optionally, you can skip the git clone step if actions/checkout is sufficient.
 
       - name: Pull subtree
-        run: cd main-repo && git config --global user.email "dragan.rapic@revendo.ch" && git config --global user.name "Dragan Rapić" && git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
+        run: |
+          cd $GITHUB_WORKSPACE
+          git config --global user.email "dragan.rapic@revendo.ch"
+          git config --global user.name "Dragan Rapić"
+          git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
-        run: cd main-repo && git push https://github.com/drapic88/mono-repo-main.git main
+        run: |
+          cd $GITHUB_WORKSPACE
+          git push https://github.com/drapic88/mono-repo-main.git main
