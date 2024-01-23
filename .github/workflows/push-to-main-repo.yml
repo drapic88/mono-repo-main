@@ -21,6 +21,9 @@ jobs:
       - name: Pull subtree
         run: cd main-repo && git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
+      - name: Merge subtree
+        run: cd main-repo && git merge -s ours --no-commit subrepo-1-main
+        
       - name: Push subtree to GitHub
         run: |
           cd main-repo
