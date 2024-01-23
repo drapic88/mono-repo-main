@@ -19,13 +19,21 @@ jobs:
           git config --global user.name "Dragan Rapić"
 
       - name: Create and checkout temporary branch for subtree pull
-        run: git checkout -b temp-subrepo-pull
+        run: |
+          cd main-repo
+          git checkout -b temp-subrepo-pull
 
       - name: Pull subtree
-        run: git subtree pull --prefix=subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
+        run: |
+          cd main-repo
+          git subtree pull --prefix=subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Merge temporary branch into main
-        run: git checkout main && git merge temp-subrepo-pull
+        run: |
+          cd main-repo
+          git checkout main && git merge temp-subrepo-pull
 
       - name: Push subtree to GitHub
-        run: git push origin main
+        run: |
+          cd main-repo
+          git push origin main
