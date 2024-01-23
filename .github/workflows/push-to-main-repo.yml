@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: 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
 
       - name: Clone remote repository
         run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
