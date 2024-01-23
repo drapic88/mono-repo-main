@@ -24,8 +24,8 @@ jobs:
           git config --global user.email "dragan.rapic@revendo.ch"
           git config --global user.name "Dragan Rapić"
 
-      - name: Pull subtree
-        run: cd main-repo && git pull https://github.com/drapic88/mono-repo-sub-repo-1.git main
+      - name: Pull subtree with explicit merge strategy
+        run: cd main-repo && git pull --strategy=ours https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
         run: cd main-repo && git push origin main
