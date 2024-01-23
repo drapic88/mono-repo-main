@@ -33,6 +33,7 @@ jobs:
         run: |
           cd main-repo 
           echo ${{ secrets.GITHUB_TOKEN }}
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/drapic88/mono-repo-main.git
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
