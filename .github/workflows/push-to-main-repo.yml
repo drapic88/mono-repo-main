@@ -11,8 +11,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@main
+
+      - name: Set up GITHUB_TOKEN
+        uses: actions/github-token@v3
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Clone remote repository
         run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
