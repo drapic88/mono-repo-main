@@ -21,4 +21,4 @@ jobs:
         run: cd main-repo && git config --global user.email "dragan.rapic@revendo.ch" && git config --global user.name "Dragan Rapić" && git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
-        run: cd main-repo && git push --all --force
+        run: cd main-repo && git config --global user.name "Dragan Rapić" && git push --all --force
