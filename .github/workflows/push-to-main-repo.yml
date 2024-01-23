@@ -34,4 +34,4 @@ jobs:
           cd main-repo 
           git push origin main
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: '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'
