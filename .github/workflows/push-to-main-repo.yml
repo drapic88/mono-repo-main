@@ -35,4 +35,4 @@ jobs:
           git status
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: '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'
