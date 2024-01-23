@@ -33,6 +33,7 @@ jobs:
         run: |
           cd main-repo 
           git status
+          echo $GITHUB_TOKEN
           git push origin main
         env:
           GITHUB_TOKEN: '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'
