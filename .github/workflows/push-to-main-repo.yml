@@ -1,0 +1,22 @@
+name: Pull Subtree and Push
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  pull-subtree-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Clone remote repository
+        run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
+
+      - name: Pull subtree
+        run: cd main-repo/subrepo-1 && git subtree pull main
+
+      - name: Push subtree to GitHub
+        run: cd main-repo/subrepo-1 && git push origin --all --force
