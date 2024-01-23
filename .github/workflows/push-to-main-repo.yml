@@ -8,7 +8,13 @@ jobs:
   pull-subtree-and-push:
     runs-on: ubuntu-latest
 
+    container:
+      image: ubuntu:latest
+
     steps:
+      - name: Install Git
+        run: apt-get update && apt-get install -y git
+
       - name: Clone remote repository
         run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
 
@@ -18,19 +24,10 @@ jobs:
           git config --global user.email "dragan.rapic@revendo.ch"
           git config --global user.name "Dragan Rapić"
 
-      - name: Fetch subtree changes
-        run: |
-          cd main-repo
-          git fetch https://github.com/drapic88/mono-repo-sub-repo-1.git main:subrepo-1-main
-
-      - name: Checkout main branch
-        run: cd main-repo && git checkout main
-
-      - name: Merge subtree changes
-        run: cd main-repo && git merge -s ours --no-commit subrepo-1-main
-
-      - name: Commit subtree changes
-        run: cd main-repo && git commit -m "Merge changes from subrepo-1"
+      - name: Pull subtree
+        run: cd main-repo && git pull https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
         run: cd main-repo && git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
