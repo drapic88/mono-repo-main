@@ -2,7 +2,7 @@ name: Pull Subtree and Push
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   pull-subtree-and-push:
