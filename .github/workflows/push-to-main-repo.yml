@@ -24,6 +24,7 @@ jobs:
       - name: Push subtree to GitHub
         run: |
           cd main-repo
-          git config --global credential.helper store
+          git config --global credential.helper 'cache --timeout=3600'
+          git remote set-url origin https://github.com/drastic88/mono-repo-main.git
           echo "https://github.com/drapic88:${{ secrets.GITHUB_TOKEN }}" > ~/.git-credentials
           git push https://github.com/drapic88/mono-repo-main.git main
