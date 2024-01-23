@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Set up GITHUB_TOKEN
-        uses: actions/github-token@v3
+        uses: actions/checkout@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           
