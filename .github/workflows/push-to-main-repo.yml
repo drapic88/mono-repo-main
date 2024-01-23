@@ -19,9 +19,9 @@ jobs:
           git config --global user.name "Dragan Rapić"
 
       - name: Pull subtree
-        run: git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
+        run: cd main-repo && git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
-        run: git push https://github.com/drapic88/mono-repo-main.git main
+        run: cd main-repo && git push https://github.com/drapic88/mono-repo-main.git main
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
