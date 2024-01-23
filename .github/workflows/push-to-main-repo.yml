@@ -19,10 +19,10 @@ jobs:
           git config --global user.name "Dragan Rapić"
 
       - name: Fetch subtree
-        run: git fetch https://github.com/drapic88/mono-repo-sub-repo-1.git main:subrepo-1-main
+        run: cd main-repo && git fetch https://github.com/drapic88/mono-repo-sub-repo-1.git main:subrepo-1-main
 
       - name: Merge subtree
-        run: git checkout main && git merge -s ours --no-commit subrepo-1-main
+        run: cd main-repo && git checkout main && git merge -s ours --no-commit subrepo-1-main
 
       - name: Push subtree to GitHub
-        run: git push origin main
+        run: cd main-repo && git push origin main
