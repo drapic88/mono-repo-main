@@ -8,15 +8,21 @@ jobs:
   pull-subtree-and-push:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
+    steps:         
       - name: Clone remote repository
         run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
-
+  
       - name: Pull subtree
-        run: cd main-repo && git config --global user.email "dragan.rapic@revendo.ch" && git config --global user.name "Dragan Rapić" && git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
+        run: |
+          cd main-repo 
+          git config --global user.email "dragan.rapic@revendo.ch" 
+          git config --global user.name "Dragan Rapić" 
+          git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
-        run: cd main-repo && git push https://github.com/drapic88/mono-repo-main.git --all --force
+        run: |
+          cd main-repo
+          git remote set-url origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git
+          git push
+        env:
+          GH_TOKEN: ${{ secrets.NOVI_TOKEN }}
