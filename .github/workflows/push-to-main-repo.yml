@@ -2,38 +2,18 @@ name: Pull Subtree and Push
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   pull-subtree-and-push:
     runs-on: ubuntu-latest
 
-    container:
-      image: ubuntu:latest
-
-    steps:
-      - name: Install Git
-        run: apt-get update && apt-get install -y git
-
+    steps:         
       - name: Clone remote repository
         run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
 
-      - name: Set up Git
-        run: |
-          cd main-repo
-          git config --global user.email "dragan.rapic@revendo.ch"
-          git config --global user.name "Dragan Rapić"
-
       - name: Pull subtree
-        run: |
-          cd main-repo
-          git subtree pull --prefix=subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
+        run: cd main-repo && git config --global user.email "dragan.rapic@revendo.ch" && git config --global user.name "Dragan Rapić" && git subtree pull --prefix subrepo-1 https://github.com/drapic88/mono-repo-sub-repo-1.git main
 
       - name: Push subtree to GitHub
-        run: |
-          cd main-repo
-          git remote -v
-          git remote set-url origin git@github.com:drapic88/mono-repo-main.git
-          git push origin main
-        env:
-          GITHUB_TOKEN: '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'
+        run: cd main-repo && git config --unset-all http.https://github.com/.extraheader && git push https://github.com/drapic88/mono-repo-main.git main
