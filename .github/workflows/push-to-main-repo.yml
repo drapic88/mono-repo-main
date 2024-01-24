@@ -22,5 +22,7 @@ jobs:
       - name: Push subtree to GitHub
         run: |
           cd main-repo
-          git remote set-url origin https://drapic88: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@github.com/drapic88/mono-repo-main.git
-          git push 
+          git remote set-url origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git
+          git push
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
