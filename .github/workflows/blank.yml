@@ -28,5 +28,5 @@ jobs:
           git remote set-url origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git
           git push
         env:
-          GH_TOKEN: ${{ secrets.NOVI_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACC_TOKEN }}
 
