@@ -15,8 +15,12 @@ jobs:
 
       - name: Update Composer.json
         run: |
+          # Get the current version from composer.json
+          current_version=$(jq -r .version composer.json)
+          new_version=date +"%s.%N" 
+          
           # Modify the composer.json file as needed
-          sed -i 's/"3.0.21"/"3.0.22"/g' composer.json
+          sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/g" composer.json
 
           # Commit the changes
           git config --local user.email "action@github.com"
