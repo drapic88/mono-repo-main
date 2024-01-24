@@ -10,8 +10,11 @@ jobs:
 
     steps:         
       - name: Clone remote repository
-        run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
-
+        run: |
+          git clone https://github.com/drapic88/mono-repo-main.git main-repo
+          git checkout -b iss53
+          git push
+  
       - name: Pull subtree
         run: |
           cd main-repo 
