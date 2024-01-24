@@ -1,3 +1,1 @@
 neki tetestat
-assa
-asas
