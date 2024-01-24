@@ -10,11 +10,7 @@ jobs:
 
     steps:         
       - name: Clone remote repository
-        run: |
-          git clone https://github.com/drapic88/mono-repo-main.git main-repo
-          cd main-repo
-          git checkout -b iss53
-          git push --set-upstream origin iss53
+        run: git clone https://github.com/drapic88/mono-repo-main.git main-repo
   
       - name: Pull subtree
         run: |
@@ -26,5 +22,4 @@ jobs:
       - name: Push subtree to GitHub
         run: |
           cd main-repo
-          git config --unset-all https://github.com/.extraheader
-          git push https://github.com/drapic88/mono-repo-main.git main
+          git push https://drapic88:Betmen1988!@github.com/drapic88/mono-repo-main.git
