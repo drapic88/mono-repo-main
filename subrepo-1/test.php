@@ -1,3 +1,2 @@
 neki tetestat
-assa
-asas
+asdasd
