@@ -1,0 +1,29 @@
+name: Change Composer.json on Push to Master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  change-composer-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update Composer.json
+        run: |
+          # Modify the composer.json file as needed
+          sed -i 's/"3.0.21"/"3.0.22"/g' composer.json
+
+          # Commit the changes
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add composer.json
+          git commit -m "Update composer.json file"
+
+          # Push the changes back to the repository
+          git push
+
