@@ -1,0 +1,24 @@
+{
+  "name": "rvag/rvag-theme",
+  "description": "Revendo Theme",
+  "version": "3.0.21",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Revendo AG"
+    }
+  ],
+  "extra": {
+    "shopware-plugin-class": "rvag\\RvagTheme\\RvagTheme",
+    "label": {
+      "de-DE": "Revendo Theme",
+      "en-GB": "Revendo Theme"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "rvag\\RvagTheme\\": "src/"
+    }
+  }
+}
