@@ -26,7 +26,7 @@ jobs:
 
           # Push the changes back to the repository
           # git remote set-url origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git
-          git push origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git
+          git push origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git master
         env:
           GH_TOKEN: ${{ secrets.ACC_TOKEN }}
 
