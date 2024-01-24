@@ -22,4 +22,4 @@ jobs:
       - name: Push subtree to GitHub
         run: |
           cd main-repo
-          git push https://${{ secrets.GH_PAT }}@github.com/drapic88/mono-repo-main.git
+          git push https://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@github.com/drapic88/mono-repo-main.git
