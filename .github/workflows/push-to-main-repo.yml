@@ -14,7 +14,7 @@ jobs:
           git clone https://github.com/drapic88/mono-repo-main.git main-repo
           cd main-repo
           git checkout -b iss53
-          git push
+          git push --set-upstream origin iss53
   
       - name: Pull subtree
         run: |
