@@ -17,7 +17,9 @@ jobs:
         run: |
           # Get the current version from composer.json
           current_version=$(jq -r .version composer.json)
-          new_version=date +"%s.%N" 
+          new_version=$(date +"%s") 
+
+          echo "Current Unix timestamp: $new_version"
           
           # Modify the composer.json file as needed
           sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/g" composer.json
