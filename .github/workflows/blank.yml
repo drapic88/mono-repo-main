@@ -11,19 +11,38 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Update Composer.json
-        run: |
-          # Get the current version from composer.json
-          current_version=$(jq -r .version composer.json)
-          new_version=$(date +"%s") 
-
-          echo "Current Unix timestamp: $new_version"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
           
-          # Modify the composer.json file as needed
-          sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/g" composer.json
-
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        
+      - name: Update Composer.json
+        env:
+            ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+            GH_TOKEN: ${{ secrets.ACC_TOKEN }}
+        run: |
+          
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+            pluginName = $file | awk -F/ '{print $3}' 
+            echo $pluginName
+            
+            if echo "$pluginName" | grep 'sw'; then
+              # Get the current version from composer.json
+              composerFilePath = "./plugins/$pluginName/composer.json"
+              current_version=$(jq -r .version $composerFilePath)
+              new_version=$(date +"%s") 
+    
+              echo "Current Unix timestamp: $new_version"
+              
+              # Modify the composer.json file as needed
+              sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/g" $composerFilePath
+            fi
+          done
+          
           # Commit the changes
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -33,23 +52,6 @@ jobs:
           # Push the changes back to the repository
           # git remote set-url origin https://drapic88:$GH_TOKEN@github.com/drapic88/mono-repo-main.git
           git push
-        env:
-          GH_TOKEN: ${{ secrets.ACC_TOKEN }}
 
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
           
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v42
-
-      - name: List all changed files
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          for file in ${ALL_CHANGED_FILES}; do
-            echo "$file was changed"
-            echo $file | awk -F/ '{print $2}'
-          done
 
