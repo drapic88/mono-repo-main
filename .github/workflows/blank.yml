@@ -24,7 +24,6 @@ jobs:
             ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
             GH_TOKEN: ${{ secrets.ACC_TOKEN }}
         run: |
-          
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
             pluginName=$(echo "$file" | awk -F'/' '{print $2}')
@@ -45,6 +44,11 @@ jobs:
               fi
             fi
           done
+
+          if git diff-index --quiet HEAD --; then
+            echo "Nothing to commit."
+            exit 0
+          fi
           
           # Commit the changes
           git config --local user.email "action@github.com"
