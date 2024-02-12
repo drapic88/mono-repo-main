@@ -27,11 +27,12 @@ jobs:
           
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
-            pluginName=$file | awk -F/ '{print $1}' 
+            pluginName=$(echo "$file" | awk -F'/' '{print $3}')
             echo "$pluginName"
             
             if echo "$pluginName" | grep 'sw'; then
               composerFilePath="./plugins/$pluginName/composer.json"
+              echo "$composerFilePath"
               if [ -f "$composerFilePath" ]; then
                 # Get the current version from composer.json
                 current_version=$(jq -r .version $composerFilePath)
