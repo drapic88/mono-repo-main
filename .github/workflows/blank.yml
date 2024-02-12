@@ -27,8 +27,8 @@ jobs:
           
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
-            pluginName = $file | awk -F/ '{$3}' 
-            echo $pluginName
+            pluginName = $file | awk -F/ '{printf $3}' 
+            echo "$pluginName"
             
             if echo "$pluginName" | grep 'sw'; then
               # Get the current version from composer.json
