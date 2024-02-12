@@ -27,19 +27,21 @@ jobs:
           
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
-            pluginName = $file | awk -F/ '{printf $3}' 
+            pluginName=$file | awk -F/ '{printf $3}' 
             echo "$pluginName"
             
             if echo "$pluginName" | grep 'sw'; then
-              # Get the current version from composer.json
-              composerFilePath = "./plugins/$pluginName/composer.json"
-              current_version=$(jq -r .version $composerFilePath)
-              new_version=$(date +"%s") 
-    
-              echo "Current Unix timestamp: $new_version"
-              
-              # Modify the composer.json file as needed
-              sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/g" $composerFilePath
+              composerFilePath="./plugins/$pluginName/composer.json"
+              if [ -f "$composerFilePath" ]; then
+                # Get the current version from composer.json
+                current_version=$(jq -r .version $composerFilePath)
+                new_version=$(date +"%s") 
+      
+                echo "Current Unix timestamp: $new_version"
+                
+                # Modify the composer.json file as needed
+                sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/g" $composerFilePath
+              fi
             fi
           done
           
