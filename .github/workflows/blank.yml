@@ -50,6 +50,6 @@ jobs:
         run: |
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
-            echo "$(dirname "${file}") is folder path"
+            echo $file | awk -F/ '{print $2}'
           done
 
