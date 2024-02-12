@@ -49,7 +49,7 @@ jobs:
           # Commit the changes
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add composer.json
+          git add .
           git commit -m "Update composer.json file"
 
           # Push the changes back to the repository
